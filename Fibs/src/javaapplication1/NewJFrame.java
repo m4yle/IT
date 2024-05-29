@@ -86,10 +86,10 @@ public class NewJFrame extends javax.swing.JFrame {
         
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int n = Integer.parseInt(jTextField1.getText());
-        String str = "";
+        StringBuilder str = new StringBuilder();
         
         if (n == 1) {
-            str = "0";
+            str.append("0");
         }   else if (n > 1) {
             int[] fib = new int[n];
             fib[0] = 0;
@@ -100,16 +100,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
             for (int i=0; i<n; ++i) {
                 if (i == 47) {
-                    str += "...";
+                    str.append("(after 47)...");
                     break;
                 }
-                str += fib[i] + " ";
+                str.append(fib[i]).append(" ");
             }
         }   else {
-                str = "Null";
+                str.append("Null");
         }
   
-        jTextField2.setText(str);
+        jTextField2.setText(str.toString());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

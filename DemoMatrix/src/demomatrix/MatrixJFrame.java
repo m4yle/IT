@@ -130,25 +130,31 @@ public class MatrixJFrame extends javax.swing.JFrame {
         int m = Integer.parseInt(jTextField2.getText());
         int min = Integer.parseInt(jTextField3.getText());
         int max = Integer.parseInt(jTextField4.getText());
-        
-        String stringnum = "";
-        
-        int[][]matrix = new int[m][n];
-        for (int i=0; i<matrix.length; i++) {
-            for (int j=0; j<matrix[i].length; j++) {
-                int tnum = (int) ((Math.random() * (max-min)) + min);
+
+        if (min > max) {
+            System.out.println("The minimum value cannot"
+                    + " be greater than the maximum!");
+            return;
+        }
+
+        StringBuilder stringnum = new StringBuilder();
+
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                int tnum = (int) ((Math.random() * (max - min)) + min);
                 matrix[i][j] = tnum;
                 if (tnum < 10) {
-                    stringnum += (String.valueOf(matrix[i][j]) + "  ");
+                    stringnum.append(String.format("%2d ", tnum));
                 } else {
-                    stringnum += (String.valueOf(matrix[i][j]) + " ");
+                    stringnum.append(String.format("%3d ", tnum));
                 }
-                
+
             }
-            stringnum += "\n";
+            stringnum.append("\n");
         }
-        writeToFile("matrix.txt", stringnum);
-        
+        writeToFile("matrix.txt", stringnum.toString());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -203,27 +209,25 @@ public class MatrixJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
-    private static void writeToFile(String fileName, String text) { 
+    private static void writeToFile(String fileName, String text) {
         try {
-          File myObj = new File(fileName);
-          if (myObj.createNewFile()) {
-            System.out.println("File created: " + myObj.getName());
-          } else {
-            System.out.println("File already exists.");
-          }
+            File myObj = new File(fileName);
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
         } catch (IOException e) {
-          System.out.println("An error occurred.");
-          e.printStackTrace();
+            System.out.println("An error occurred.");
         }
-        
+
         try {
-          FileWriter myWriter = new FileWriter(fileName);
-          myWriter.write(text);
-          myWriter.close();
-          System.out.println("Successfully wrote to the file.");
+            FileWriter myWriter = new FileWriter(fileName);
+            myWriter.write(text);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-          System.out.println("An error occurred.");
-          e.printStackTrace();
+            System.out.println("An error occurred.");
         }
     }
 }
